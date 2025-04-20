@@ -25,7 +25,6 @@
 
 <body class="g-sidenav-show bg-gray-100">
     <!-- Menu lateral -->
-    <!-- Menu lateral -->
  <aside
         class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3"
         id="sidenav-main">
@@ -36,7 +35,7 @@
                 id="iconSidenav"></i>
             <a
                 class="navbar-brand m-0"
-                href="http://localhost/anchors/CI3/index.php/dashboard">
+                href="http://localhost/crm/CI3/index.php/dashboard">
                 <img
                     src="../assets/img/fav/favicon.ico"
                     class="navbar-brand-img h-100 rounded-circle"
@@ -51,7 +50,7 @@
             <ul class="navbar-nav">
                 <!-- Icone Dashboard -->
                 <li class="nav-item">
-                    <a class="nav-link active" href="http://localhost/anchors/CI3/index.php/dashboard">
+                    <a class="nav-link active" href="http://localhost/crm/CI3/index.php/dashboard">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-home text-white"></i> <!-- Icone do Font Awesome -->
@@ -71,12 +70,12 @@
                     <div class="collapse" id="submenuTabelas">
                         <ul class="nav flex-column ms-5">
                             <li class="nav-item">
-                                <a class="nav-link" href="http://localhost/anchors/CI3/index.php/empresas">
+                                <a class="nav-link" href="http://localhost/crm/CI3/index.php/empresas">
                                     Empresas
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="http://localhost/anchors/CI3/index.php/prospect">
+                                <a class="nav-link" href="http://localhost/crm/CI3/index.php/prospect">
                                     Prospect
                                 </a>
                             </li>
@@ -96,17 +95,17 @@
                     <div class="collapse" id="submenuFinanceiro">
                         <ul class="nav flex-column ms-5">
                             <li class="nav-item">
-                                <a class="nav-link" href="http://localhost/anchors/CI3/index.php/financeiro">
+                                <a class="nav-link" href="http://localhost/crm/CI3/index.php/financeiro">
                                     Financeiro
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="http://localhost/anchors/CI3/index.php/contasapagar">
+                                <a class="nav-link" href="http://localhost/crm/CI3/index.php/contasapagar">
                                     Contas a Pagar
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="http://localhost/anchors/CI3/index.php/contasareceber">
+                                <a class="nav-link" href="http://localhost/crm/CI3/index.php/contasareceber">
                                     Contas a Receber
                                 </a>
                             </li>
@@ -122,7 +121,7 @@
                     </h6>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost/anchors/CI3/index.php/perfil">
+                    <a class="nav-link" href="http://localhost/crm/CI3/index.php/perfil">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-user text-dark"></i> <!-- Icone do Font Awesome -->
@@ -132,7 +131,7 @@
                 </li>
                 <!-- Ícone de Logout -->
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost/anchors/CI3/index.php/login/logout">
+                    <a class="nav-link" href="http://localhost/crm/CI3/index.php/login/logout">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-sign-out-alt text-dark"></i> <!-- Icone do Font Awesome -->
                         </div>
@@ -328,7 +327,7 @@
         <!-- Github buttons -->
         <script async defer src="https://buttons.github.io/buttons.js"></script>
         <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-        <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
+        <!-- <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script> -->
 </body>
 
 </html>

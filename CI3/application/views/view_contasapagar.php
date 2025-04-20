@@ -27,6 +27,7 @@
                     <table class="table table-hover align-middle text-center mb-0">
                         <thead class="table-light">
                             <tr>
+                                <th><i class="fas fa-cog"></i></th>
                                 <th>Descrição</th>
                                 <th>Valor</th>
                                 <th>Vencimento</th>
@@ -37,7 +38,12 @@
                         </thead>
                         <tbody>
                             <?php foreach ($contas as $conta): ?>
-                                <tr>
+                                <tr>   
+                                    <td class="d-flex justify-content-center">
+                                        <button class="btn btn-outline-secondary">
+                                            <i class="fas fa-cog"></i>
+                                        </button>
+                                    </td>
                                     <td><?= $conta->descricao ?></td>
                                     <td>R$ <?= number_format($conta->valor, 2, ',', '.') ?></td>
                                     <td><?= date('d/m/Y', strtotime($conta->data_vencimento)) ?></td>

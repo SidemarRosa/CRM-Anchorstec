@@ -38,7 +38,7 @@
         class="navbar-brand m-0"
         href="http://localhost/crm/CI3/index.php/dashboard">
         <img
-          src="../assets/img/fav/favicon.ico"
+          src="../assets/img/fav/favicon.png"
           class="navbar-brand-img h-100 rounded-circle"
           alt="main_logo" />
         <span class="ms-1 font-weight-bold">Anchorstec</span>
@@ -51,10 +51,10 @@
       <ul class="navbar-nav">
         <!-- Icone Dashboard -->
         <li class="nav-item">
-          <a class="nav-link active" href="http://localhost/crm/CI3/index.php/dashboard">
+          <a class="nav-link" href="http://localhost/crm/CI3/index.php/dashboard">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="fas fa-home text-white"></i> <!-- Icone do Font Awesome -->
+              <i class="fas fa-home text-dark"></i> <!-- Icone do Font Awesome -->
             </div>
             <span class="nav-link-text ms-1">Dashboard</span>
           </a>
@@ -92,9 +92,9 @@
 
         <!-- Ícone Fiannceiro com "dropdown" usando collapse -->
         <li class="nav-item">
-          <a class="nav-link" data-bs-toggle="collapse" href="#submenuFinanceiro" role="button" aria-expanded="false" aria-controls="submenuFinanceiro">
+          <a class="nav-link active" data-bs-toggle="collapse" href="#submenuFinanceiro" role="button" aria-expanded="false" aria-controls="submenuFinanceiro">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="fas fa-table text-dark"></i>
+              <i class="fas fa-table text-white"></i>
             </div>
             <span class="nav-link-text ms-1">Financeiro</span>
           </a>
@@ -370,7 +370,7 @@
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
+  <!-- <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script> -->
   <script>
     // Gráfico de Barras: Contas a Pagar vs. Contas a Receber
     var ctx1 = document.getElementById('contas-pagar-receber').getContext('2d');

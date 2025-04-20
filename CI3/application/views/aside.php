@@ -11,7 +11,7 @@
                 class="navbar-brand m-0"
                 href="http://localhost/crm/CI3/index.php/dashboard">
                 <img
-                    src="../assets/img/fav/favicon.ico"
+                    src="../assets/img/fav/favicon.png"
                     class="navbar-brand-img h-100 rounded-circle"
                     alt="main_logo" />
                 <span class="ms-1 font-weight-bold">Anchorstec</span>
