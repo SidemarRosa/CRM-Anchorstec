@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <!-- Head -->
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/fav/apple-icon.png">
-    <link rel="icon" type="image/ico" href="../assets/img/fav/favicon.ico">
+    <link rel="icon" type="image/ico" href="../assets/img/fav/favicon.png">
     <title>
         <?php echo $title; ?>
     </title>

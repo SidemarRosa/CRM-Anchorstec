@@ -44,10 +44,6 @@
                     <div class="mb-3">
                       <input type="password" name="password" class="form-control" placeholder="Senha" aria-label="Password" required>
                     </div>
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" id="rememberMe">
-                      <label class="form-check-label" for="rememberMe">Lembrar do login</label>
-                    </div>
                     <div class="text-center">
                       <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">
                         Entrar
