@@ -1,12 +1,12 @@
-# Anchorstec - ERP
+# Anchorstec - CRM
 
 ## Descrição do Projeto
-ERP desenvolvido para controle financeiro, vendas, e gestão de projetos da anchorstec.
+CRM desenvolvido para controle Vendas, prospecão, proposta contratos e afins.
 
 ## Funcionalidades
 - Controle financeiro
 - Relatórios e dashboards
-- Controle de projetos
+- Controle de prospecão
 
 ## Tecnologias Utilizadas
 Mencione as tecnologias usadas no desenvolvimento do projeto:
