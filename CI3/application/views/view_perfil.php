@@ -37,7 +37,7 @@
                 class="navbar-brand m-0"
                 href="http://localhost/crm/CI3/index.php/dashboard">
                 <img
-                    src="../assets/img/fav/favicon.ico"
+                    src="../assets/img/fav/favicon.png"
                     class="navbar-brand-img h-100 rounded-circle"
                     alt="main_logo" />
                 <span class="ms-1 font-weight-bold">Anchorstec</span>
@@ -50,10 +50,10 @@
             <ul class="navbar-nav">
                 <!-- Icone Dashboard -->
                 <li class="nav-item">
-                    <a class="nav-link active" href="http://localhost/crm/CI3/index.php/dashboard">
+                    <a class="nav-link" href="http://localhost/crm/CI3/index.php/dashboard">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-home text-white"></i> <!-- Icone do Font Awesome -->
+                            <i class="fas fa-home text-dark"></i> <!-- Icone do Font Awesome -->
                         </div>
                         <span class="nav-link-text ms-1">Dashboard</span>
                     </a>
@@ -121,10 +121,10 @@
                     </h6>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost/crm/CI3/index.php/perfil">
+                    <a class="nav-link active" href="http://localhost/crm/CI3/index.php/perfil">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-user text-dark"></i> <!-- Icone do Font Awesome -->
+                            <i class="fas fa-user text-white"></i> <!-- Icone do Font Awesome -->
                         </div>
                         <span class="nav-link-text ms-1">Perfil</span>
                     </a>
@@ -150,7 +150,7 @@
             <div class="container-fluid py-1">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 ps-2 me-sm-6 me-5">
-                        <li class="breadcrumb-item text-sm"><a class="text-white opacity-5">Pagina</a></li>
+                        <li class="breadcrumb-item text-sm text-dark"><a href="http://localhost/crm/CI3/index.php/dashboard" class="text-dark opacity-5">Home</a></li>
                         <li class="breadcrumb-item text-sm text-white active" aria-current="page">Perfil</li>
                     </ol>
                     <h6 class="text-white font-weight-bolder ms-2">Perfil</h6>

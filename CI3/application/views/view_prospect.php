@@ -82,7 +82,7 @@
               return;
             }
 
-            $.getJSON(`http://localhost/anchors/CI3/index.php/empresas/consultar/${cnpj}`, function(data) {
+            $.getJSON(`http://localhost/crm/CI3/index.php/empresas/consultar/${cnpj}`, function(data) {
               if (data.erro) {
                 alert(data.erro);
               } else {

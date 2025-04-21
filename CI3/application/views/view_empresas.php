@@ -1,36 +1,39 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <title>Consulta de Empresas</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
+
 <body class="bg-light">
 
-<div class="container py-5">
-  <h2 class="mb-4">Consultar Empresa por CNPJ</h2>
 
-  <div class="input-group mb-3">
-    <input type="text" id="cnpj" class="form-control" placeholder="Digite o CNPJ">
-    <button class="btn btn-primary" id="btnConsultar">Consultar</button>
+  <div class="container py-5">
+    <h2 class="mb-4">Consultar Empresa por CNPJ</h2>
+    <p>todas as buscas ficam salva no banco de dados de empresas de prospecção fria</p>
+    <div class="input-group mb-3">
+      <input type="text" id="cnpj" class="form-control" placeholder="Digite o CNPJ">
+      <button class="btn btn-primary" id="btnConsultar">Consultar</button>
+    </div>
+
+    <div id="resultado" class="mt-4"></div>
   </div>
+  <script>
+    $('#btnConsultar').on('click', function() {
+      const cnpj = $('#cnpj').val().replace(/\D/g, '');
 
-  <div id="resultado" class="mt-4"></div>
-</div>
-<script>
-  $('#btnConsultar').on('click', function () {
-    const cnpj = $('#cnpj').val().replace(/\D/g, '');
+      if (!cnpj) return alert('Digite um CNPJ válido.');
 
-    if (!cnpj) return alert('Digite um CNPJ válido.');
+      $.getJSON(`http://localhost/anchors/CI3/index.php/empresas/consultar/${cnpj}`, function(data) {
+        if (data.erro) {
+          $('#resultado').html(`<div class="alert alert-danger">${data.erro}</div>`);
+          return;
+        }
 
-    $.getJSON(`http://localhost/anchors/CI3/index.php/empresas/consultar/${cnpj}`, function (data) {
-      if (data.erro) {
-        $('#resultado').html(`<div class="alert alert-danger">${data.erro}</div>`);
-        return;
-      }
-
-      const html = `
+        const html = `
         <h4>Dados da Empresa</h4>
         <table class="table table-bordered table-striped">
           <tbody>
@@ -53,10 +56,11 @@
         </table>
       `;
 
-      $('#resultado').html(html);
+        $('#resultado').html(html);
+      });
     });
-  });
-</script>
+  </script>
 
 </body>
+
 </html>

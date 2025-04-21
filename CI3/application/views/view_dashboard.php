@@ -86,6 +86,11 @@
                                     Api dados python
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://localhost/crm/CI3/index.php/kanban_prospect">
+                                   Kanban Prospecão
+                                </a>
+                            </li>
                             <!-- Adicione mais subitens aqui se quiser -->
                         </ul>
                     </div>

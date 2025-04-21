@@ -7,7 +7,7 @@
 <?php endif; ?>
 
 <?php if ($this->session->flashdata('error')): ?>
-  <div class="alert alert-danger " role="alert">
+  <div class="alert alert-danger" role="alert">
     <?= $this->session->flashdata('error') ?>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
@@ -20,7 +20,7 @@
       <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center">
         <h6 class="mb-0">Contas a Receber</h6>
         <button id="btn-nova-conta" class="btn btn-success btn-sm">
-          <i class="bi bi-plus-circle"></i> Nova Conta a Receber
+          Nova Conta a Receber
         </button>
       </div>
       <div class="card-body p-0">

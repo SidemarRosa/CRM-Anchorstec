@@ -27,10 +27,10 @@
         </div>
         <!-- Listagem -->
         <div style="overflow-x:auto; width: 100%;">
-          <table class="table table-striped table-bordered table-hover">
-            <thead class="table-dark">
+          <table class="table table-hover align-middle text-center mb-0">
+            <thead class="table-light">
               <tr>
-                <th><i class="fas fa-box"></i></th>
+                <th><i class="fas fa-cog"></i></th>
                 <th>CNPJ</th>
                 <th>Nome Fantasia</th>
                 <th><i class="fas fa-phone"></i></th>

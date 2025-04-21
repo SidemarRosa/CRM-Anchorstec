@@ -11,7 +11,7 @@
                     <ol
                         class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                         <li class="breadcrumb-item text-sm">
-                            <a class="opacity-5 text-dark" href="http://localhost/anchors/CI3/index.php/dashboard">Home</a>
+                            <a class="opacity-5 text-dark" href="http://localhost/crm/CI3/index.php/dashboard">Home</a>
                         </li>
                         <li
                             class="breadcrumb-item text-sm text-dark active"
