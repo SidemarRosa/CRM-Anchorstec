@@ -1,30 +1,65 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Kanban_Prospect extends CI_Controller {
-
-    public function __construct() {
+class Kanban_Prospect extends CI_Controller
+{
+    public function __construct()
+    {
         parent::__construct();
-        // Load necessary models, libraries, or helpers here
-        $this->load->model('Model_kanban_prospect'); // Load your model
-        $this->load->helper('url'); // Load URL helper for redirecting
-        $this->load->library('session'); // Load session library for flashdata messages
-        $this->load->library('form_validation'); // Load form validation library
-        $this->load->library('pagination'); // Load pagination library if needed
-        $this->load->library('table'); // Load table library if needed
+        $this->load->model('Model_kanban_prospect');
     }
 
-    public function index() {
-        // Default method
+    public function index()
+    {
         $data['title'] = 'CRM Anchors - Kanban Prospecção';
-       $data['page'] = 'Kanban - Prospecção';
-       $this->load->view('header', $data); // cabeçalho da página
-       $this->load->view('aside'); // barra lateral da página
-       $this->load->view('navbar', $data); // barra de navegação da página
-       $this->load->view('view_kanban_prospect', $data);
-       $this->load->view('footer'); // rodapé da página
-       $this->load->view('scripts'); // scripts da página
+        $data['page'] = 'Kanban - Prospecção';
+
+        // Etapas do funil
+        $data['etapas'] = [
+            'Prospecção Fria',
+            'Follow-up 1',
+            'Follow-up 2',
+            'Lead Quente',
+            'Follow-up Proposta Enviada',
+            'Nutrição',
+            'Reativação'
+        ];
+
+        // Agrupa empresas por etapa
+        $data['empresas_por_etapa'] = [];
+        foreach ($data['etapas'] as $etapa) {
+            $data['empresas_por_etapa'][$etapa] = $this->Model_kanban_prospect->getBySituacaoFollowup($etapa);
+        }
+
+        // Views
+        $this->load->view('header', $data);
+        $this->load->view('aside');
+        $this->load->view('navbar', $data);
+        $this->load->view('view_kanban_prospect', $data);
+        $this->load->view('footer');
+        $this->load->view('scripts');
     }
+
+    public function salvar($data) {}
+
+
+    public function atualizar_etapa()
+    {
+        $id = $this->input->post('id');
+        $etapa = $this->input->post('etapa');
+
+        if ($id && $etapa) {
+            $this->db->where('id_contato_prospect', $id);
+            $this->db->update('contato_prospect', [
+                'situacao_followup' => $etapa,
+                'update_at' => date('Y-m-d H:i:s')
+            ]);
+            echo json_encode(['status' => 'ok']);
+        } else {
+            echo json_encode(['status' => 'erro']);
+        }
+    }
+
 
     // Add other methods as needed
 }
