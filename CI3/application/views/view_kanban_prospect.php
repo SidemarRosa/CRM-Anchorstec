@@ -1,37 +1,66 @@
+<head>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+</head>
 <style>
     body {
-        font-family: Arial;
+        font-family: Arial, sans-serif;
+    }
+
+    .kanban-container {
+        overflow-x: auto;
+        padding: 20px;
     }
 
     .kanban-board {
         display: flex;
-        gap: 15px;
-        overflow-x: auto;
+        gap: 20px;
+        min-width: 1000px;
     }
 
     .kanban-column {
-        background: #f5f5f5;
-        padding: 10px;
+        background: #f4f6f8;
         border-radius: 10px;
-        width: 300px;
+        padding: 15px;
+        min-width: 280px;
         flex-shrink: 0;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .kanban-column-header {
+        font-weight: bold;
+        text-align: center;
+        background: #007bff;
+        color: white;
+        border-radius: 6px;
+        padding: 10px;
+        margin-bottom: 10px;
     }
 
     .kanban-card {
         background: white;
         border: 1px solid #ccc;
-        border-radius: 5px;
+        border-radius: 6px;
         padding: 10px;
         margin-bottom: 10px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     }
 
-    .kanban-card h4 {
-        margin: 0 0 5px;
+    .kanban-card h5 {
+        font-size: 16px;
+        margin-bottom: 5px;
+        font-weight: bold;
     }
 
-    .whatsapp {
-        color: green;
-        text-decoration: none;
+    .kanban-card p {
+        margin: 0;
+        font-size: 13px;
+    }
+
+    .text-muted {
+        color: #888;
+        font-size: 13px;
     }
 </style>
 <div class="container-fluid py-4">
@@ -126,46 +155,70 @@
         </div>
     </div>
 
-    <div class="container-fluid">
-        <h2 class="mt-4"><?= $page ?></h2>
-        <div class="row">
-            <?php foreach ($etapas as $etapa): ?>
-                <div class="col-md-12 mb-4">
-                    <div class="card border-primary">
-                        <div class="card-header bg-primary text-white text-center">
-                            <strong><?= $etapa ?></strong>
-                        </div>
-                        <div class="card-body bg-light" style="max-height: 80vh; overflow-y: auto;">
-                            <?php if (!empty($empresas_por_etapa[$etapa])): ?>
-                                <?php foreach ($empresas_por_etapa[$etapa] as $empresa): ?>
-                                    <div class="card mb-3 shadow-sm">
-                                        <div class="card-body p-2">
-                                            <h5 class="card-title mb-1"><?= $empresa->nome_fantasia_empresa ?></h5>
-                                            <p class="mb-1"><strong>CNPJ:</strong> <?= $empresa->cnpj_empresa ?></p>
-                                            <p class="mb-1"><strong>WhatsApp:</strong> <?= $empresa->telefone_wpp_empresa ?></p>
-                                            <p class="mb-1"><strong>Primeiro Contato:</strong> <?= date('d/m/Y', strtotime($empresa->primeiro_contato)) ?></p>
-                                            <p class="mb-1"><strong>Próximo Contato:</strong> <?= date('d/m/Y', strtotime($empresa->proximo_contato)) ?></p>
-                                            <p class="mb-1"><strong>Último Follow-up:</strong> <?= date('d/m/Y', strtotime($empresa->ultimo_followup)) ?></p>
-                                            <p class="mb-1"><strong>Motivo:</strong> <?= $empresa->motivo_followup ?></p>
-                                            <p class="mb-1"><strong>CNAE Principal:</strong> <?= $empresa->cnae_principal_empresa ?></p>
-                                            <p class="mb-1"><strong>CNAEs Secundários:</strong> <?= $empresa->cnae_secundario_empresa ?></p>
-                                            <p class="mb-1"><strong>Usuário:</strong> <?= $empresa->id_usuario ?></p>
-                                            <p class="mb-1"><strong>Abordagem:</strong> <?= $empresa->abordagem_contato_empresa ?></p>
-                                            <p class="mb-0"><strong>Status:</strong> <?= $empresa->status_empresa ?></p>
-                                        </div>
-                                    </div>
-                                <?php endforeach; ?>
-                            <?php else: ?>
-                                <p class="text-muted">Nenhuma empresa nesta etapa.</p>
-                            <?php endif; ?>
-                        </div>
+    <div class="container-fluid py-4">
+        <h2 class="mb-4"><?= $page ?></h2>
+
+        <div class="kanban-container">
+            <div class="kanban-board">
+                <?php foreach ($etapas as $etapa): ?>
+                    <div class="kanban-column sortable" data-etapa="<?= $etapa ?>" id="kanban-column-<?= $etapa ?>">
+                        <div class="kanban-column-header"><?= $etapa ?></div>
+
+                        <?php if (!empty($empresas_por_etapa[$etapa])): ?>
+                            <?php foreach ($empresas_por_etapa[$etapa] as $empresa): ?>
+                                <div class="kanban-card" data-id="<?= $empresa->id_contato_prospect ?>">
+                                    <h5 class="card-title"><?= $empresa->nome_fantasia_empresa ?></h5>
+                                    <p class="mb-1"><strong>CNPJ:</strong> <?= $empresa->cnpj_empresa ?></p>
+                                    <p class="mb-1"><strong>WhatsApp:</strong> <?= $empresa->telefone_wpp_empresa ?></p>
+                                    <p class="mb-1"><strong>Primeiro Contato:</strong> <?= date('d/m/Y', strtotime($empresa->primeiro_contato)) ?></p>
+                                    <p class="mb-1"><strong>Próximo Contato:</strong> <?= date('d/m/Y', strtotime($empresa->proximo_contato)) ?></p>
+                                    <p class="mb-1"><strong>Último Follow-up:</strong> <?= date('d/m/Y', strtotime($empresa->ultimo_followup)) ?></p>
+                                    <p class="mb-1"><strong>Motivo:</strong> <?= $empresa->motivo_followup ?></p>
+                                    <p class="mb-1"><strong>CNAE Principal:</strong> <?= $empresa->cnae_principal_empresa ?></p>
+                                    <p class="mb-1"><strong>CNAEs Secundários:</strong> <?= $empresa->cnae_secundario_empresa ?></p>
+                                    <p class="mb-1"><strong>Usuário:</strong> <?= $empresa->id_usuario ?></p>
+                                    <p class="mb-1"><strong>Abordagem:</strong> <?= $empresa->abordagem_contato_empresa ?></p>
+                                    <p class="mb-0"><strong>Status:</strong> <?= $empresa->status_empresa ?></p>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <p class="text-muted">Nenhum lead aqui.</p>
+                        <?php endif; ?>
                     </div>
-                </div>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
+            </div>
         </div>
-
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
 
+    <script>
+        $(function() {
+            $(".sortable").sortable({
+                connectWith: ".sortable",
+                placeholder: "ui-state-highlight",
+                receive: function(event, ui) {
+                    var id = ui.item.data("id");
+                    var novaEtapa = $(this).data("etapa");
 
-
-</div>
+                    $.ajax({
+                        url: "kanban_prospect/atualizar_etapa",
+                        method: "POST",
+                        data: {
+                            id: id,
+                            etapa: novaEtapa
+                        },
+                        success: function(response) {
+                            const r = JSON.parse(response);
+                            if (r.status === 'ok') {
+                                console.log('Etapa atualizada com sucesso!');
+                                location.reload();
+                            } else {
+                                alert('Erro ao atualizar etapa.');
+                            }
+                        }
+                    });
+                }
+            }).disableSelection();
+        });
+    </script>
