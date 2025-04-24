@@ -88,7 +88,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="http://localhost/crm/CI3/index.php/kanban_prospect">
-                                   Kanban Prospecão
+                                    Kanban Prospecão
                                 </a>
                             </li>
                             <!-- Adicione mais subitens aqui se quiser -->
@@ -215,7 +215,7 @@
                                         <h5 class="font-weight-bolder mb-0">
                                             R$<?= number_format($lucro, 2, ',', '.') ?>
                                             <span class="text-success text-sm font-weight-bolder">
-                                                +<?= number_format(($lucro * 100) / ($totalContasAPagar ?: 1), 2, ',', '.') ?>%
+                                                +<?= number_format(($lucro * 100) / ($totalContasAPagar ?: 1), 2, ',', '.') ?>% Mensal
                                             </span>
                                         </h5>
                                     </div>
@@ -236,12 +236,12 @@
                             <div class="row">
                                 <div class="col-8">
                                     <div class="numbers">
-                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Usuários</p>
+                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Meta Mês</p>
                                         <h5 class="font-weight-bolder mb-0">
-                                            +<?= $usuariosHoje ?>
+                                            % <?= $metaMensal ?>
                                             <br>
                                             <span class="text-<?= $percentualUsuarios >= 0 ? 'success' : 'danger' ?> text-sm font-weight-bolder">
-                                                <?= $percentualUsuarios >= 0 ? '+' : '' ?><?= number_format($percentualUsuarios, 0) ?>%
+                                                R$ 4K Mensal
                                             </span>
                                         </h5>
                                     </div>
@@ -264,10 +264,10 @@
                                     <div class="numbers">
                                         <p class="text-sm mb-0 text-capitalize font-weight-bold">Clientes</p>
                                         <h5 class="font-weight-bolder mb-0">
-                                            +<?= $clientesHoje ?>
+                                            +<?= $totalClientes ?>
                                             <br>
                                             <span class="text-<?= $percentualClientes >= 0 ? 'success' : 'danger' ?> text-sm font-weight-bolder">
-                                                <?= $percentualClientes >= 0 ? '+' : '' ?><?= number_format($percentualClientes, 0) ?>%
+                                                <?= $percentualClientes >= 0 ? '+' : '' ?><?= number_format($percentualClientes, 0) ?>% Diaria
                                             </span>
                                         </h5>
                                     </div>
@@ -293,7 +293,7 @@
                                             R$ <?= number_format($contasAReceberHoje, 2, ',', '.') ?>
                                             <span class="text-<?= $percentualContasareceberHoje >= 0 ? 'success' : 'danger' ?> text-sm font-weight-bolder">
                                                 <br>
-                                                <?= $percentualContasareceberHoje >= 0 ? '+' : '' ?><?= number_format($percentualContasareceberHoje, 2) ?>%
+                                                <?= $percentualContasareceberHoje >= 0 ? '+' : '' ?><?= number_format($percentualContasareceberHoje, 2) ?>% Diaria
                                             </span>
                                         </h5>
                                     </div>
@@ -358,7 +358,7 @@
                         </div>
                         <div class="card-body p-4">
                             <div class="chart">
-                                <canvas id="chart-bars" class="chart-canvas border-radius-lg" height="100"></canvas>
+                                <canvas id="chart-bars" class="chart-canvas border-radius-lg" height="125"></canvas>
                             </div>
                         </div>
                     </div>
@@ -372,61 +372,61 @@
                     <div class="card z-index-2">
                         <div class="card-body p-3">
                             <h6 class="ms-2 mt-4 mb-0">Indicadores:</h6>
-                            <!-- <p class="text-sm ms-2">
-                                (<span class="font-weight-bolder">+100%</span>) comparado a semana passada
-                            </p> -->
                             <div class="container border-radius-lg">
                                 <div class="row">
                                     <!-- Usuários -->
-                                    <div class="col-3 py-3 ps-0">
-                                        <div class="d-flex mb-2">
+                                    <div class="col-6 col-md-3 py-3 ps-0">
+                                        <div class="d-flex align-items-center mb-2">
                                             <div class="icon icon-xxs shadow border-radius-sm bg-gradient-primary text-center me-2 d-flex align-items-center justify-content-center">
                                                 <i class="fas fa-file-alt text-white"></i>
                                             </div>
-                                            <p class="text-xs mt-1 mb-0 font-weight-bold">Usuários</p>
+                                            <p class="text-xs mb-0 font-weight-bold">Usuários total</p>
                                         </div>
                                         <h4 class="font-weight-bolder"><?= $usuariosAtivos ?></h4>
                                         <div class="progress w-75">
                                             <div class="progress-bar bg-dark w-60" role="progressbar"></div>
                                         </div>
                                     </div>
-                                    <!-- Clicks -->
-                                    <div class="col-3 py-3 ps-0">
-                                        <div class="d-flex mb-2">
+
+                                    <!-- Prospect total -->
+                                    <div class="col-6 col-md-3 py-3 ps-0">
+                                        <div class="d-flex align-items-center mb-2">
                                             <div class="icon icon-xxs shadow border-radius-sm bg-gradient-info text-center me-2 d-flex align-items-center justify-content-center">
                                                 <i class="fas fa-rocket text-white"></i>
                                             </div>
-                                            <p class="text-xs mt-1 mb-0 font-weight-bold">Estoque</p>
+                                            <p class="text-xs mb-0 font-weight-bold">Prospect total</p>
                                         </div>
-                                        <h4 class="font-weight-bolder">264</h4>
+                                        <h4 class="font-weight-bolder"><?= $prospectFeitos ?></h4>
                                         <div class="progress w-75">
                                             <div class="progress-bar bg-dark w-90" role="progressbar"></div>
                                         </div>
                                     </div>
+
+                                    <!-- Prospect hoje -->
+                                    <div class="col-6 col-md-3 py-3 ps-0">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <div class="icon icon-xxs shadow border-radius-sm bg-gradient-danger text-center me-2 d-flex align-items-center justify-content-center">
+                                                <i class="fas fa-tasks text-white"></i>
+                                            </div>
+                                            <p class="text-xs mb-0 font-weight-bold">Prospect hoje</p>
+                                        </div>
+                                        <h4 class="font-weight-bolder"><?= $prospectHoje ?></h4>
+                                        <div class="progress w-75">
+                                            <div class="progress-bar bg-dark w-50" role="progressbar"></div>
+                                        </div>
+                                    </div>
+
                                     <!-- Vendas -->
-                                    <div class="col-3 py-3 ps-0">
-                                        <div class="d-flex mb-2">
+                                    <div class="col-6 col-md-3 py-3 ps-0">
+                                        <div class="d-flex align-items-center mb-2">
                                             <div class="icon icon-xxs shadow border-radius-sm bg-gradient-warning text-center me-2 d-flex align-items-center justify-content-center">
                                                 <i class="fas fa-credit-card text-white"></i>
                                             </div>
-                                            <p class="text-xs mt-1 mb-0 font-weight-bold">Vendas</p>
+                                            <p class="text-xs mb-0 font-weight-bold">Vendas mês</p>
                                         </div>
                                         <h4 class="font-weight-bolder"><?= $totalContasAReceber ?></h4>
                                         <div class="progress w-75">
                                             <div class="progress-bar bg-dark w-30" role="progressbar"></div>
-                                        </div>
-                                    </div>
-                                    <!-- Projetos -->
-                                    <div class="col-3 py-3 ps-0">
-                                        <div class="d-flex mb-2">
-                                            <div class="icon icon-xxs shadow border-radius-sm bg-gradient-danger text-center me-2 d-flex align-items-center justify-content-center">
-                                                <i class="fas fa-tasks text-white"></i>
-                                            </div>
-                                            <p class="text-xs mt-1 mb-0 font-weight-bold">Projetos</p>
-                                        </div>
-                                        <h4 class="font-weight-bolder">13</h4>
-                                        <div class="progress w-75">
-                                            <div class="progress-bar bg-dark w-50" role="progressbar"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -434,7 +434,7 @@
                         </div>
                     </div>
                     <!-- Card de Pedidos -->
-                    <div class="card h-50">
+                    <div class="card h-65">
                         <div class="card-header pb-0">
                             <h6>Ultimas Vendas</h6>
                             <!-- <p class="text-sm">
@@ -469,7 +469,7 @@
                 <div class="col-lg-6">
                     <div class="card z-index-2 shadow-sm h-100">
                         <div class="card-header py-3">
-                            <h6 class="mb-0">Vendas por Produtos</h6>
+                            <h6 class="mb-0">Vendas pagamentos</h6>
                             <p>Competente ao ano</p>
                         </div>
                         <div class="card-body p-4">
@@ -514,10 +514,10 @@
                     <div class="card-header pb-0">
                         <div class="row">
                             <div class="col-lg-6 col-7">
-                                <h6>Projects</h6>
+                                <h6>Projetos</h6>
                                 <p class="text-sm mb-0">
                                     <i class="fa fa-check text-info" aria-hidden="true"></i>
-                                    <span class="font-weight-bold ms-1">10</span> Esse ano
+                                    <span class="font-weight-bold ms-1">5</span> Esse ano
                                 </p>
                             </div>
                         </div>
@@ -534,10 +534,10 @@
                                             Time
                                         </th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Preço
+                                            Bucket
                                         </th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Status
+                                            Andamento
                                         </th>
                                     </tr>
                                 </thead>
@@ -550,7 +550,7 @@
                                                     <img src="../assets/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd" />
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">EcoAmbientec</h6>
+                                                    <h6 class="mb-0 text-sm">Development</h6>
                                                 </div>
                                             </div>
                                         </td>
@@ -585,7 +585,7 @@
                                                     <img src="../assets/img/small-logos/logo-atlassian.svg" class="avatar avatar-sm me-3" alt="atlassian" />
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Urso Digital</h6>
+                                                    <h6 class="mb-0 text-sm">Comercial</h6>
                                                 </div>
                                             </div>
                                         </td>
@@ -623,7 +623,7 @@
                                                     <img src="../assets/img/small-logos/logo-slack.svg" class="avatar avatar-sm me-3" alt="team7" />
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Anchors Page</h6>
+                                                    <h6 class="mb-0 text-sm">MKT DIGITAL</h6>
                                                 </div>
                                             </div>
                                         </td>
@@ -658,7 +658,7 @@
                                                     <img src="../assets/img/small-logos/logo-slack.svg" class="avatar avatar-sm me-3" alt="team7" />
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">ERP - Anchors</h6>
+                                                    <h6 class="mb-0 text-sm">GOOGLE MEU NEGOCIO</h6>
                                                 </div>
                                             </div>
                                         </td>
@@ -729,6 +729,7 @@
         var labels = <?php echo json_encode($labels); ?>;
         var vendasData = <?php echo json_encode($vendas); ?>;
 
+
         // Criando o gráfico de barras PRIMEIRO DASHBOARD
         var ctx = document.getElementById("chart-bars").getContext("2d");
         new Chart(ctx, {
@@ -797,44 +798,29 @@
         });
 
         // SEGUNDO DASHBOARD
+        const labelsMetodos = <?= json_encode(array_column($metodosPagamento, 'metodo_pagamento')) ?>;
+        const valoresMetodos = <?= json_encode(array_map('intval', array_column($metodosPagamento, 'total'))) ?>;
         var ctx2 = document.getElementById("chart-line").getContext("2d");
         var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
         gradientStroke1.addColorStop(1, "rgba(115, 9, 177, 0.2)");
         gradientStroke1.addColorStop(0.2, "rgba(72,72,176,0.0)");
         gradientStroke1.addColorStop(0, "rgba(203,12,159,0)"); //purple colors
-        var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
-        gradientStroke2.addColorStop(1, "rgba(20,23,39,0.2)");
-        gradientStroke2.addColorStop(0.2, "rgba(72,72,176,0.0)");
-        gradientStroke2.addColorStop(0, "rgba(20,23,39,0)"); //purple colors
         new Chart(ctx2, {
-            type: "line",
+            type: "line", // antes era "line"
             data: {
-                labels: labels,
+                labels: labelsMetodos,
                 datasets: [{
-                        label: "Sites",
-                        tension: 0.4,
-                        borderWidth: 0,
-                        pointRadius: 0,
-                        borderColor: "#cb0c9f",
-                        borderWidth: 3,
-                        backgroundColor: gradientStroke1,
-                        fill: true,
-                        data: [1, 4, 3, 1, 1, 3, 4, 2, 5],
-                        maxBarThickness: 6,
-                    },
-                    {
-                        label: "Ecommerce",
-                        tension: 0.4,
-                        borderWidth: 0,
-                        pointRadius: 0,
-                        borderColor: "#3A416F",
-                        borderWidth: 3,
-                        backgroundColor: gradientStroke2,
-                        fill: true,
-                        data: [3, 4, 4, 1, 2, 2, 3, 2, 4],
-                        maxBarThickness: 6,
-                    },
-                ],
+                    label: 'Método de Pagamento', // Pode ser alterado conforme a necessidade
+                    data: valoresMetodos, // valoresMetodos é o array com os totais
+                    tension: 0.4,
+                    borderWidth: 3,
+                    borderColor: "#cb0c9f", // Cor da linha (roxa)
+                    backgroundColor: gradientStroke1, // Gradiente como fundo
+                    fill: true, // Preenche a área abaixo da linha
+                    pointRadius: 5, // Tamanho dos pontos
+                    pointBackgroundColor: "#cb0c9f", // Cor dos pontos
+                    maxBarThickness: 6,
+                }]
             },
             options: {
                 responsive: true,
@@ -852,21 +838,22 @@
                     y: {
                         grid: {
                             drawBorder: false,
-                            display: true,
-                            drawOnChartArea: true,
+                            display: false,
+                            drawOnChartArea: false,
                             drawTicks: false,
-                            borderDash: [5, 5],
                         },
                         ticks: {
-                            display: true,
-                            padding: 10,
-                            color: "#b2b9bf",
+                            suggestedMin: 0,
+                            suggestedMax: 500,
+                            beginAtZero: true,
+                            padding: 15,
                             font: {
-                                size: 11,
+                                size: 14,
                                 family: "Open Sans",
                                 style: "normal",
                                 lineHeight: 2,
                             },
+                            color: "#0000FF", // Changed to blue
                         },
                     },
                     x: {
@@ -875,18 +862,9 @@
                             display: false,
                             drawOnChartArea: false,
                             drawTicks: false,
-                            borderDash: [5, 5],
                         },
                         ticks: {
                             display: true,
-                            color: "#b2b9bf",
-                            padding: 20,
-                            font: {
-                                size: 11,
-                                family: "Open Sans",
-                                style: "normal",
-                                lineHeight: 2,
-                            },
                         },
                     },
                 },

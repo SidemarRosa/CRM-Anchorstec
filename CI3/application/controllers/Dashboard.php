@@ -12,6 +12,7 @@ class Dashboard extends CI_Controller
         $this->load->model('Model_usuario'); // Carrega o model Model_usuario
         $this->load->model('Model_contasapagar'); // Carrega o model Model_contasapagar
         $this->load->model('Model_contasareceber'); // Carrega o model Model_contasareceber
+        $this->load->model('Model_kanban_prospect'); // Carrega o model Model_kanban_prospect
     }
     public function index()
     {   
@@ -23,6 +24,8 @@ class Dashboard extends CI_Controller
             $clientesHoje = $this->Model_clientes->getClientesHoje();
             $clientesOntem = $this->Model_clientes->getClientesOntem();
             $percentualClientes = $this->Model_clientes->calcularPercentual($clientesHoje, $clientesOntem);
+            //total de clientes
+            $totalClientes = $this->Model_clientes->getTotalClientes();
             //usuarios isights
             $usuariosHoje = $this->Model_usuario->getUsuariosHoje();
             $usuariosOntem = $this->Model_usuario->getUsuariosOntem();
@@ -35,10 +38,11 @@ class Dashboard extends CI_Controller
             // Recuperando o total de contas a receber de hoje e ontem
             $contasAReceberHoje = $this->Model_contasareceber->getTotalContasAReceberHoje();
             $contasAReceberOntem = $this->Model_contasareceber->getTotalContasAReceberOntem();
-
+            $metamensal = $this->Model_contasareceber->getMetaMensal();
             // Calcular o percentual de contas a receber
             $percentualContasareceberHoje = $this->Model_contasareceber->calcularPercentual($contasAReceberHoje, $contasAReceberOntem);
-
+            // metodos de pagamento
+            $metodosPagamento = $this->Model_contasareceber->getTotaisPorMetodoPagamento();
             // Verifique se os valores não são zero antes de calcular o lucro
             $lucro = $totalContasAReceber - $totalContasAPagar;
 
@@ -48,25 +52,34 @@ class Dashboard extends CI_Controller
             // Pegando as vendas por mês para Dashboard
             $vendasPorMes = $this->Model_contasareceber->getVendasPorMes();
             // Meses do ano
-            $meses = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            $meses = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
             //ultimas 2 vendas
             $ultimasVendas = $this->Model_contasareceber->getUltimasVendas();
+            //total prospect
+            $prospectFeitos = $this->Model_kanban_prospect->getTotalProspect();
+            // prospect hoje
+            $prospectHoje = $this->Model_kanban_prospect->getProspectHoje();
 
             // Dados para a view
             $data = [
                 'clientesHoje' => $clientesHoje,
                 'percentualClientes' => $percentualClientes,
+                'totalClientes' => $totalClientes,
                 'usuariosHoje' => $usuariosHoje,
                 'percentualUsuarios' => $percentualUsuarios,
                 'totalContasAReceber' => $totalContasAReceber,
                 'totalContasAPagar' => $totalContasAPagar,
                 'percentualContasareceberHoje' => $percentualContasareceberHoje,
                 'contasAReceberHoje' => $contasAReceberHoje,
+                'metaMensal' => $metamensal,
+                'metodosPagamento' => $metodosPagamento,
                 'lucro' => $lucro,
                 'labels' => $meses,
                 'vendas' => array_values($vendasPorMes),
                 'ultimasVendas' => $ultimasVendas,
-                'usuariosAtivos' => $usuariosAtivos
+                'usuariosAtivos' => $usuariosAtivos,
+                'prospectFeitos' => $prospectFeitos,
+                'prospectHoje' => $prospectHoje
             ];
  
             // Carregar a view e passar os dados

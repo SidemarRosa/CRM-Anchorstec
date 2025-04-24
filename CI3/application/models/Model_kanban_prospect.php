@@ -36,4 +36,15 @@ class Model_kanban_prospect extends CI_Model {
         return $query->result();
     }
 
+    public function getTotalProspect() {
+        $this->db->from('contato_prospect');
+        return $this->db->count_all_results();
+    }
+
+    public function getProspectHoje() {
+        $this->db->where('DATE(criado_em) = CURDATE()');
+        $query = $this->db->get('contato_prospect');
+        return $query->num_rows();
+    }
+
 }

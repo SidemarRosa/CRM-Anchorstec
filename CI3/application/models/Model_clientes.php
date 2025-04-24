@@ -6,6 +6,13 @@ class Model_clientes extends CI_Model {
     public function __construct() {
         parent::__construct();
     }
+
+    // Example method to get all clients
+    public function getTotalClientes() {
+        $this->db->from('clientes');
+        return $this->db->count_all_results();
+    }
+
     public function getClientesHoje() {
         $this->db->where('DATE(data_cadastro)', date('Y-m-d'));
         return $this->db->count_all_results('clientes');
@@ -22,4 +29,5 @@ class Model_clientes extends CI_Model {
         }
         return (($hoje - $ontem) / $ontem) * 100;
     }
+    
 }

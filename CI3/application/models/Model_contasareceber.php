@@ -93,7 +93,6 @@ class Model_contasareceber extends CI_Model
         }
         return (($valorHoje - $valorOntem) / $valorOntem) * 100;
     }
-
     // Função para pegar as 2 últimas vendas
     public function getUltimasVendas()
     {
@@ -105,5 +104,33 @@ class Model_contasareceber extends CI_Model
         $query = $this->db->get();
 
         return $query->result_array();  // Retorna como array
+    }
+
+    // Método para pegar a meta mensal
+    public function getMetaMensal()
+    {
+        $metaVendas = 4000;
+
+        // Pega o total de contas a receber do mês atual
+        $this->db->select_sum('valor');
+        $this->db->where('MONTH(data_vencimento)', date('m'));
+        $this->db->where('YEAR(data_vencimento)', date('Y'));
+        $query = $this->db->get('contasareceber');
+
+        $totalMes = $query->row()->valor ?: 0;
+
+        // Calcula a porcentagem que falta
+        $percentualFaltante = 100 - (($totalMes / $metaVendas) * 100);
+
+        return round(max(0, $percentualFaltante), 2); // Nunca menor que 0
+
+    }
+    public function getTotaisPorMetodoPagamento()
+    {
+        $this->db->select('metodo_pagamento, COUNT(*) as total');
+        $this->db->from('contasareceber');
+        $this->db->group_by('metodo_pagamento');
+        $query = $this->db->get();
+        return $query->result_array();
     }
 }
