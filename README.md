@@ -1,3 +1,6 @@
+![image](https://github.com/user-attachments/assets/1c2daad7-9070-4620-a502-e6a72a19bea9)
+
+
 # Anchorstec - CRM
 
 ## Descrição do Projeto
@@ -17,6 +20,7 @@ Mencione as tecnologias usadas no desenvolvimento do projeto:
 
 # Contribuição
 Aberto para contribuições, opiniões, ajustes, Dicas.
+
 
 # Licença
 
