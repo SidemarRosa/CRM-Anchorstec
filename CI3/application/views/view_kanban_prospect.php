@@ -169,7 +169,23 @@
                                 <div class="kanban-card" data-id="<?= $empresa->id_contato_prospect ?>">
                                     <h5 class="card-title"><?= $empresa->nome_fantasia_empresa ?></h5>
                                     <p class="mb-1"><strong>CNPJ:</strong> <?= $empresa->cnpj_empresa ?></p>
-                                    <p class="mb-1"><strong>WhatsApp:</strong> <?= $empresa->telefone_wpp_empresa ?></p>
+                                    <?php
+                                    $tel = rtrim((string) $empresa->telefone_wpp_empresa, '.0');
+                                    $ddd = isset($empresa->ddd_empresa) ? (int) $empresa->ddd_empresa : '';
+                                    $numeroCompleto = $ddd . $tel;
+
+                                    $isCelular = strlen($numeroCompleto) >= 10 && substr($numeroCompleto, -9, 1) === '9';
+                                    $mensagem = urlencode('Olá, tudo bem?');
+                                    ?>
+                                    <p class="mb-1"><strong>WhatsApp:</strong>
+                                        <?php if ($isCelular): ?>
+                                            <a href="https://wa.me/<?= $numeroCompleto ?>?text=<?= $mensagem ?>" target="_blank" class="btn btn-success btn-sm">
+                                                <i class="fab fa-whatsapp"></i> WhatsApp
+                                            </a>
+                                        <?php else: ?>
+                                            <?= $empresa->telefone_wpp_empresa ?>
+                                        <?php endif; ?>
+                                    </p>
                                     <p class="mb-1"><strong>Primeiro Contato:</strong> <?= date('d/m/Y', strtotime($empresa->primeiro_contato)) ?></p>
                                     <p class="mb-1"><strong>Próximo Contato:</strong> <?= date('d/m/Y', strtotime($empresa->proximo_contato)) ?></p>
                                     <p class="mb-1"><strong>Último Follow-up:</strong> <?= date('d/m/Y', strtotime($empresa->ultimo_followup)) ?></p>

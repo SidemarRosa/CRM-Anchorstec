@@ -50,21 +50,27 @@ class Python extends CI_Controller
             $this->load->view('scripts'); // scripts da página
         }
     }
-    // Método para inserir uma empresa no kanban
     public function insertKanban($id_empresa)
     {
         $this->load->model('model_kanban_prospect');
-        $this->load->model('model_empresas'); 
+        $this->load->model('model_empresas');
 
         $empresa = $this->Model_python->get_by_id($id_empresa);
 
         if ($empresa) {
+            // Tratar telefone
+            $telefone = $empresa->telefone_1 ?? $empresa->telefone_2;
+            $telefone = rtrim((string) $telefone, '.0');
+            $telefone = preg_replace('/\D/', '', $telefone);
+            $ddd = isset($empresa->ddd_1) ? (int) $empresa->ddd_1 : (isset($empresa->ddd_2) ? (int) $empresa->ddd_2 : '');
+            $telefoneCompleto = $ddd . $telefone;
+
             $data = [
                 'id_empresa' => $empresa->id,
                 'nome_fantasia_empresa' => $empresa->nome_fantasia ?? null,
                 'cnpj_empresa' => $empresa->cnpj,
                 'status_empresa' => 'Ativo',
-                'telefone_wpp_empresa' => $empresa->telefone_1 ?? $empresa->telefone_2, 
+                'telefone_wpp_empresa' => $telefoneCompleto,
                 'cnae_principal_empresa' => $empresa->cnae_fiscal,
                 'cnae_secundario_empresa' => $empresa->cnae_fiscal_secundario ?? null,
                 'abordagem_contato_empresa' => 'Prospecção',
@@ -78,11 +84,9 @@ class Python extends CI_Controller
                 'update_at' => date('Y-m-d H:i:s'),
             ];
 
-            //redirect 
-             $this->model_kanban_prospect->insert($data);
+            $this->model_kanban_prospect->insert($data);
             $this->session->set_flashdata('success', 'Empresa adicionada ao Kanban com sucesso!');
-            redirect('http://localhost/crm/CI3/index.php/Python.php'); // Redirecionar para o kanban após a inserção
-
+            redirect('http://localhost/crm/CI3/index.php/kanban_prospect'); // Redirecionar para a página do kanban
         } else {
             show_404();
         }

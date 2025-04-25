@@ -50,6 +50,8 @@ class Kanban_Prospect extends CI_Controller
             $this->db->where('id_contato_prospect', $id);
             $this->db->update('contato_prospect', [
                 'situacao_followup' => $etapa,
+                'ultimo_followup' => date('Y-m-d H:i:s'),
+                'proximo_contato' => date('Y-m-d H:i:s', strtotime('+7 days')),
                 'update_at' => date('Y-m-d H:i:s')
             ]);
             echo json_encode(['status' => 'ok']);
