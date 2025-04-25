@@ -11,6 +11,7 @@ class Python extends CI_Controller
         $this->load->library('session');
         $this->load->helper(array('url', 'form'));
         $this->load->model('Model_python');
+        $this->load->model('Model_kanban_prospect'); // Supondo que esse seja o model do kanban
         $this->load->library('pagination');
     }
 
@@ -47,6 +48,43 @@ class Python extends CI_Controller
             $this->load->view('view_python', $data); // view principal da página
             $this->load->view('footer'); // rodapé da página
             $this->load->view('scripts'); // scripts da página
+        }
+    }
+    // Método para inserir uma empresa no kanban
+    public function insertKanban($id_empresa)
+    {
+        $this->load->model('model_kanban_prospect');
+        $this->load->model('model_empresas'); 
+
+        $empresa = $this->Model_python->get_by_id($id_empresa);
+
+        if ($empresa) {
+            $data = [
+                'id_empresa' => $empresa->id,
+                'nome_fantasia_empresa' => $empresa->nome_fantasia ?? null,
+                'cnpj_empresa' => $empresa->cnpj,
+                'status_empresa' => 'Ativo',
+                'telefone_wpp_empresa' => $empresa->telefone_1 ?? $empresa->telefone_2, 
+                'cnae_principal_empresa' => $empresa->cnae_fiscal,
+                'cnae_secundario_empresa' => $empresa->cnae_fiscal_secundario ?? null,
+                'abordagem_contato_empresa' => 'Prospecção',
+                'id_usuario' => $this->session->userdata('user_id'),
+                'primeiro_contato' => date('Y-m-d H:i:s'),
+                'proximo_contato' => date('Y-m-d H:i:s', strtotime('+7 days')),
+                'ultimo_followup' => date('Y-m-d H:i:s'),
+                'motivo_followup' => 'Prospecção',
+                'situacao_followup' => 'Prospecção fria',
+                'criado_em' => date('Y-m-d H:i:s'),
+                'update_at' => date('Y-m-d H:i:s'),
+            ];
+
+            //redirect 
+             $this->model_kanban_prospect->insert($data);
+            $this->session->set_flashdata('success', 'Empresa adicionada ao Kanban com sucesso!');
+            redirect('http://localhost/crm/CI3/index.php/Python.php'); // Redirecionar para o kanban após a inserção
+
+        } else {
+            show_404();
         }
     }
 }

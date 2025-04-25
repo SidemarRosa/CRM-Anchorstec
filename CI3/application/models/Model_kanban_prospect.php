@@ -45,6 +45,6 @@ class Model_kanban_prospect extends CI_Model {
         $this->db->where('DATE(criado_em) = CURDATE()');
         $query = $this->db->get('contato_prospect');
         return $query->num_rows();
-    }
+    }  
 
 }

@@ -7,8 +7,9 @@ class Kanban_Prospect extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Model_kanban_prospect');
-    }
+        $this->load->library('session');
 
+    }
     public function index()
     {
         $data['title'] = 'CRM Anchors - Kanban Prospecção';
@@ -39,9 +40,6 @@ class Kanban_Prospect extends CI_Controller
         $this->load->view('footer');
         $this->load->view('scripts');
     }
-
-    public function salvar($data) {}
-
 
     public function atualizar_etapa()
     {

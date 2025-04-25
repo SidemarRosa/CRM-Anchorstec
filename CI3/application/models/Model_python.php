@@ -36,4 +36,10 @@ class Model_python extends CI_Model
 
     return $this->db->limit(100)->get('empresas_ativas')->result();
   }
+  public function get_by_id($id)
+  {
+    $this->db->where('id', $id);
+    $query = $this->db->get('empresas_ativas');
+    return $query->row();
+  }
 }

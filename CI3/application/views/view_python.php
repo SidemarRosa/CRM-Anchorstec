@@ -56,7 +56,20 @@
                 }
               ?>
                 <tr>
-                  <td><i class="fas fa-cog"></i></td>
+                  <td class="text-center">
+                    <div class="dropdown">
+                      <button class="btn btn-primary" type="button" id="dropdownMenuButton<?= $empresa->id ?>" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-cog"></i>
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton<?= $empresa->id ?>">
+                        <a href="http://localhost/crm/CI3/index.php/python/insertKanban/<?= $empresa->id ?>">
+                          Adicionar ao Kanban
+                        </a>
+
+                        <li><a class="dropdown-item text-danger" href="URL_PARA_DELETAR?id=<?= $empresa->id ?>" onclick="return confirm('Tem certeza que deseja excluir este registro?');">Excluir</a></li>
+                      </ul>
+                    </div>
+                  </td>
                   <td><?= $empresa->cnpj ?></td>
                   <td><?= $empresa->nome_fantasia ?></td>
                   <td><?= $telefone ?></td>
